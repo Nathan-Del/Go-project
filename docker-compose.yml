@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+
+  db:
+    container_name: ticketing-db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: gorm
+      POSTGRES_USER: gorm
+      POSTGRES_DB: gorm
+    ports:
+      - 5432:5432
+  api:
+    container_name: ticketing-api
+    image: ticketing-api
+    restart: always
+    environment:
+      TICKETING_API_PORT: 8080
+    ports:
+      - 8080:8080
+    volumes:
+      - ./upload:/root/upload
